@@ -9,21 +9,12 @@ Ajustar a string de Conexão no arquivo  appsettings.json
 
 
 
-### Script Criacção da Tabela
+### Script Criação da Tabela
 USE [PotifolioASB]
 GO
 
-/****** Object:  Table [dbo].[Fluxo]    Script Date: 05/09/2024 15:39:26 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[Fluxo](
+"
+CREATE TABLE [Fluxo](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Descricao] [varchar](50) NULL,
 	[Entrada] [bit] NULL CONSTRAINT [DF_Fluxo_Entrada]  DEFAULT ((1)),
@@ -34,3 +25,4 @@ CREATE TABLE [dbo].[Fluxo](
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+"
