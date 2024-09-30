@@ -12,6 +12,8 @@ namespace PotifolioASB.Repository.Context
         { }
 
         public DbSet<Fluxo> Fluxo { get; set; }
+        public DbSet<Responsavel> Responsavel { get; set; }
+        public DbSet<Ocorrencia> Ocorrencia { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

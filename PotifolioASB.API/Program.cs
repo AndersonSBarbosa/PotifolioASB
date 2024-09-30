@@ -1,9 +1,5 @@
 using AutoMapper;
-using EscNet.IoC.Hashers;
-using Isopoh.Cryptography.Argon2;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PotifolioASB.API.Token;
 using PotifolioASB.Domain.Entities;
@@ -13,7 +9,8 @@ using PotifolioASB.Repository.Context;
 using PotifolioASB.Service.Interfaces;
 using PotifolioASB.Service.Services;
 using PotifolioASB.Service.ViewModels.Fluxo;
-using System.Text;
+using PotifolioASB.Service.ViewModels.Ocorrencia;
+using PotifolioASB.Service.ViewModels.Responsavel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +47,12 @@ var automapperConfig = new MapperConfiguration(cfg =>
 {
     cfg.CreateMap<CreateFluxoViewModel, Fluxo>().ReverseMap();
     cfg.CreateMap<UpdateFluxoViewModel, Fluxo>().ReverseMap();
+
+    cfg.CreateMap<CreateOcorrenciaViewModel, Ocorrencia>().ReverseMap();
+    cfg.CreateMap<UpdateOcorrenciaViewModel, Ocorrencia>().ReverseMap();
+
+    cfg.CreateMap<CreateResponsavelViewModel, Responsavel>().ReverseMap();
+    cfg.CreateMap<UpdateResponsavelViewModel, Responsavel>().ReverseMap();
 });
 
 builder.Services.AddSingleton(automapperConfig.CreateMapper());
@@ -64,8 +67,16 @@ builder.Services.AddDbContext<ManagerContext>(options =>
 #region InjecaoDependencia
     //Injeção de Dependencias
     builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
+
     builder.Services.AddScoped<IFluxoService, FluxoService>();
     builder.Services.AddScoped<IFluxoRepository, FluxoRepository>();
+
+    builder.Services.AddScoped<IOcorrenciaService, OcorrenciaService>();
+    builder.Services.AddScoped<IOcorrenciaRepository, OcorrenciaRepository>();
+
+    builder.Services.AddScoped<IResponsavelService, ResponsavelService>();
+    builder.Services.AddScoped<IResponsavelRepository, ResponsavelRepository>();
+
 #endregion
 
 

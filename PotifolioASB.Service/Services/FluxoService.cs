@@ -44,7 +44,7 @@ namespace PotifolioASB.Service.Services
                 var itemExists = await _fluxoRepository.GetAsync(dto.Id);
 
                 if (itemExists == null)
-                    throw new DomainExceptions("não existe usuario com esse ID informado!");
+                    throw new DomainExceptions("não existe item com esse ID informado!");
 
                 var item = _mapper.Map<Fluxo>(dto);
 

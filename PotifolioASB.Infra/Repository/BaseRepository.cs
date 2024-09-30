@@ -2,6 +2,7 @@
 using PotifolioASB.Domain.Entities;
 using PotifolioASB.Infra.Interfaces;
 using PotifolioASB.Repository.Context;
+using System;
 using System.Linq.Expressions;
 
 namespace PotifolioASB.Infra.Repository
@@ -17,19 +18,37 @@ namespace PotifolioASB.Infra.Repository
 
         public virtual async Task<T> CreateAsync(T obj)
         {
-            obj.DataRegistro = DateTime.Now;
-            _context.Add(obj);
-            await _context.SaveChangesAsync();
+            try
+            {
+                obj.DataRegistro = DateTime.Now;
+                obj.DataAtualizacao = DateTime.Now;
+                obj.Ativo = true;
+                _context.Add(obj);
+                await _context.SaveChangesAsync();
 
-            return obj;
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
         public virtual async Task<T> UpdateAsync(T obj)
         {
-            _context.Entry(obj).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                obj.DataAtualizacao = DateTime.Now;
+                _context.Entry(obj).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
 
-            return obj;
         }
 
         public virtual async Task RemoveAsync(int id)
